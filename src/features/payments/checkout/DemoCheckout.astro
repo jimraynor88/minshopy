@@ -2,26 +2,18 @@
 import { getConfig, formatPrice } from '../../../config';
 import type { PendingPayment } from '../lightning/pending';
 
-// Simulated checkout view. Rendered by /pay/[publicId] for demo-backed payments.
-// The form posts back to that same route, which calls settleDemoCheckout().
 interface Props {
   pending: PendingPayment;
   declined?: string | null;
 }
 const { pending, declined = null } = Astro.props;
 
-const OUTCOMES: Record<string, string> = {
-  approve: 'Approve payment',
-  decline: 'Decline — card declined',
-  insufficient: 'Decline — insufficient funds',
-};
 const { storeName } = getConfig();
 const total = formatPrice(pending.amount_total_cents, pending.currency);
 const shipping = pending.shipping_cents
   ? formatPrice(pending.shipping_cents, pending.currency)
   : null;
 
-// Parse the cart snapshot for a line summary (same shape checkout stored).
 type Snap = { id: number; q: number; n: string; p: number };
 let items: Snap[] = [];
 try {
@@ -32,18 +24,10 @@ try {
 ---
 
 <div class="mx-auto max-w-md">
-  <div class="mb-6 rounded-lg border-2 border-amber-400 bg-amber-50 px-4 py-4 text-center text-amber-900">
-    <p class="text-base font-bold uppercase tracking-wide">⚠️ Demo — not a real payment</p>
-    <p class="mt-1 text-sm">
-      No card is charged. Submitting places a real order tagged
-      <code class="rounded bg-amber-100 px-1">demo</code> so you can see the full flow.
-    </p>
-  </div>
-
-  <h1 class="mb-1 font-serif text-3xl tracking-tight sm:text-4xl">Checkout</h1>
+  <h1 class="mb-1 font-serif text-3xl tracking-tight sm:text-4xl">Finalizar pedido</h1>
   <p class="mb-6 text-sm text-muted">{storeName}</p>
 
-  {/* Order summary */}
+  <!-- Resumen del pedido -->
   <div class="mb-6 rounded-lg border border-line bg-surface p-4">
     <ul class="divide-y divide-line text-sm">
       {items.map((it) => (
@@ -57,9 +41,53 @@ try {
     </ul>
     {shipping && (
       <div class="flex items-center justify-between border-t border-line pt-2 text-sm text-muted">
-        <span>Shipping</span>
+        <span>Envío</span>
         <span class="tabular-nums">{shipping}</span>
       </div>
+    )}
+    <div class="mt-2 flex items-center justify-between border-t border-line pt-2 text-base font-medium">
+      <span>Total</span>
+      <span class="tabular-nums">{total}</span>
+    </div>
+  </div>
+
+  {declined && (
+    <p class="mb-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+      {declined}
+    </p>
+  )}
+
+  <form method="POST" class="space-y-4">
+    <div>
+      <label class="mb-1 block text-xs font-medium text-muted" for="email">
+        Correo para la confirmación del pedido
+      </label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        value={pending.email ?? ''}
+        autocomplete="email"
+        required
+        class="w-full rounded-md border border-line px-3 py-2 text-sm focus:border-brand focus:outline-none"
+      />
+    </div>
+
+    <!-- Botón que redirige a PayPal -->
+    <a
+      href="https://x.jim88.de/pay"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="block w-full rounded-md bg-brand px-5 py-3 text-center text-sm font-medium uppercase tracking-wider text-on-brand hover:bg-brand-hover"
+    >
+      Pagar con PayPal
+    </a>
+
+    <a href="/cart" class="block text-center text-xs uppercase tracking-widest text-faint hover:text-brand">
+      Cancelar
+    </a>
+  </form>
+</div>      </div>
     )}
     <div class="mt-2 flex items-center justify-between border-t border-line pt-2 text-base font-medium">
       <span>Total</span>
