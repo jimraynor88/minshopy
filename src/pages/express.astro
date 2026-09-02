@@ -99,7 +99,7 @@ if (isBuyNow && productPublicId) {
   if (short) {
     return Astro.redirect(
       `/cart?error=${encodeURIComponent(
-        'Some items are no longer available in the quantity you selected. Please review your cart.',
+        'Alguno(s) artículo(s) no tiene(n) la cantidad solicitada, ajústalo.',
       )}`,
       303,
     );
@@ -137,13 +137,13 @@ const METHOD: Record<string, { label: string; hint: string }> = {
   stripe: { label: 'Pay with card', hint: 'Visa, Mastercard, Apple Pay & more' },
   lightning: { label: 'Pay with Lightning ⚡', hint: 'Instant — from any Lightning wallet' },
   opennode: { label: 'Pay with Bitcoin', hint: 'On-chain or Lightning (OpenNode)' },
-  demo: { label: 'Demo checkout', hint: 'Simulated — places a real test order, no charge' },
+  demo: { label: 'Pagar', hint: 'Pago manual desde la pasarela de pago de PayPal, introduce el importe manualmente y tu email.' },
 };
 ---
 
-<Layout title="Checkout" description="Express checkout.">
+<Layout title="Checkout" description="Pago rápido.">
   <div class="mx-auto max-w-md">
-    <p class="text-xs uppercase tracking-[0.25em] text-muted">Express checkout</p>
+    <p class="text-xs uppercase tracking-[0.25em] text-muted">Pago rápido</p>
     <h1 class="mt-2 mb-6 font-serif text-3xl tracking-tight sm:text-4xl">{heading}</h1>
 
     <ul class="divide-y divide-line border-y border-line">
