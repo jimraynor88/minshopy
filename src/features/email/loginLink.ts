@@ -1,21 +1,21 @@
 import type { EmailMessage } from './provider';
 import { PALETTE, emailShell, emailButton } from './layout';
 
-/** Passwordless sign-in email — a single-use, short-lived magic link. */
+/** Correo de inicio de sesión sin contraseña: un enlace mágico de un solo uso y corta duración. */
 export function loginLinkEmail(to: string, link: string, storeName: string): EmailMessage {
-  const subject = `Sign in to ${storeName}`;
-  const text = `Click to sign in to ${storeName}:\n\n${link}\n\nThis link expires in 15 minutes. If you didn't request it, ignore this email.`;
+  const subject = `Iniciar sesión en ${storeName}`;
+  const text = `Haz clic para iniciar sesión en ${storeName}:\n\n${link}\n\nEste enlace caduca en 15 minutos. Si no lo solicitaste, ignora este correo.`;
   const html = emailShell({
     storeName,
-    heading: 'Sign in',
-    subheading: 'This link expires in 15 minutes and can only be used once.',
+    heading: 'Iniciar sesión',
+    subheading: 'Este enlace caduca en 15 minutos y solo puede usarse una vez.',
     body:
-      emailButton(link, 'Sign in') +
+      emailButton(link, 'Iniciar sesión') +
       `<p style="margin:0;font-size:12px;line-height:1.6;color:${PALETTE.muted};">
-        Button not working? Paste this into your browser:<br>
+        ¿No funciona el botón? Copia y pega esto en tu navegador:<br>
         <a href="${link}" style="color:${PALETTE.muted};word-break:break-all;">${link}</a>
       </p>`,
-    footer: "If you didn't request this, you can safely ignore this email.",
+    footer: 'Si no solicitaste este correo, puedes ignorarlo sin problemas.',
   });
   return { to, subject, html, text };
 }
