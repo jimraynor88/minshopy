@@ -35,7 +35,7 @@ export function createDemoProvider(db: D1Database): PaymentProvider {
         bolt11: null,
         amountSat: null,
         amountTotalCents: subtotal + shippingCents,
-        currency: params.lineItems[0]?.currency ?? 'usd',
+        currency: params.lineItems[0]?.currency ?? 'eur',
         email: params.selectedShipping?.email ?? null,
         itemsJson: params.orderItemsJson ?? null,
         shippingCents,
