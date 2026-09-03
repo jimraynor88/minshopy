@@ -40,15 +40,15 @@ const shopHref = catalogPath(Astro.locals.settings?.homePage);
 <Layout title="Your account">
   <div class="mx-auto max-w-2xl">
     <div class="mb-6 flex items-center justify-between">
-      <h1 class="font-serif text-3xl tracking-tight sm:text-4xl">Your orders</h1>
-      <a href="/account/logout" class="text-sm font-medium text-accent">Sign out</a>
+      <h1 class="font-serif text-3xl tracking-tight sm:text-4xl">Tus Pedidos</h1>
+      <a href="/account/logout" class="text-sm font-medium text-accent">Desconectar</a>
     </div>
     <p class="mb-6 text-sm text-muted">Signed in as {email}</p>
 
     {
       orders.length === 0 ? (
         <p class="rounded-lg border border-line bg-surface px-4 py-6 text-center text-sm text-muted">
-          No orders yet. <a href={shopHref} class="font-medium text-accent">Start shopping →</a>
+          No orders yet. <a href={shopHref} class="font-medium text-accent">Compra →</a>
         </p>
       ) : (
         <ul class="divide-y divide-line overflow-hidden rounded-lg border border-line bg-surface">
