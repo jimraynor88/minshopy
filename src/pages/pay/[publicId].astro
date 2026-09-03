@@ -101,8 +101,8 @@ const description = isDemo
 <Layout title={title} description={description}>
   {isDemo && payExpired && (
     <Fragment>
-      <h1 class="mb-2 font-serif text-3xl tracking-tight sm:text-4xl">Checkout expired</h1>
-      <p class="text-muted">This demo checkout has expired. Please start a new one.</p>
+      <h1 class="mb-2 font-serif text-3xl tracking-tight sm:text-4xl">Proceso de pago expirado</h1>
+      <p class="text-muted">Este proceso de pago ha expirado. Por favor, inicia uno nuevo.</p>
     </Fragment>
   )}
   {isDemo && !payExpired && <DemoCheckout pending={pending} declined={declined} />}
