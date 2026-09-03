@@ -47,7 +47,7 @@ const PAYMENT_LABELS: Record<string, string> = {
   stripe: 'Card',
   lightning: 'Lightning',
   opennode: 'Bitcoin',
-  demo: 'Pago Manual a través de PayPal https://x.jim88.de/paypal',
+  demo: 'Pago Manual a través de PayPal https://x.jim88.de/pay',
 };
 const paymentLabel = order?.payment_method ? PAYMENT_LABELS[order.payment_method] ?? null : null;
 // The catalog is at / until the home page is pointed elsewhere.
