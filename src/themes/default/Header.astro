@@ -72,7 +72,7 @@ const { model } = Astro.props;
     >
       <StoreNav links={model.headerLinks} />
       {/* Search input is desktop-only; give mobile a link to the search page. */}
-      <a href={model.search.action} class="hover:text-brand sm:hidden">Search</a>
+      <a href={model.search.action} class="hover:text-brand sm:hidden">Buscar</a>
       {model.cart.enabled && <StoreCartControl href={model.cart.href} />}
       {model.account.enabled && <StoreAccountControl href={model.account.href} />}
     </nav>
