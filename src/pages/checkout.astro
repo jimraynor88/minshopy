@@ -201,7 +201,7 @@ let options: { label: string; amountCents: number; pickup?: boolean }[] = [];
 const errors: string[] = [];
 
 // Demo submits itself: the sample address on the first GET, no typing.
-const submitted = isPost || rail === 'demo';
+const submitted = isPost;
 if (submitted) {
   if (!/.+@.+\..+/.test(addr.email)) errors.push('Se necesita un email válido.');
   if (!addr.name) errors.push('No olvides tu Nombre.');
@@ -245,7 +245,7 @@ if (submitted) {
     } else {
       stage = 'shipping';
       // Demo auto-picks the first rate — the rate step is also skipped.
-      const chosenLabel = fld('shipping_label') || (rail === 'demo' ? (options[0]?.label ?? '') : '');
+      const chosenLabel = fld('shipping_label');
       if (chosenLabel) {
         const chosen = options.find((o) => o.label === chosenLabel);
         if (!chosen) {
