@@ -59,7 +59,7 @@ if (isBuyNow && productPublicId) {
       : null;
   if (variants.length > 0 && !variant) {
     return Astro.redirect(
-      `/products/${product.slug}?error=${encodeURIComponent(`Please choose a ${product.variant_label || 'option'}.`)}`,
+      `/products/${product.slug}?error=${encodeURIComponent(`Por favor elije una ${product.variant_label || 'opción'}.`)}`,
       303,
     );
   }
@@ -137,7 +137,7 @@ const METHOD: Record<string, { label: string; hint: string }> = {
   stripe: { label: 'Pay with card', hint: 'Visa, Mastercard, Apple Pay & more' },
   lightning: { label: 'Pay with Lightning ⚡', hint: 'Instant — from any Lightning wallet' },
   opennode: { label: 'Pay with Bitcoin', hint: 'On-chain or Lightning (OpenNode)' },
-  demo: { label: 'Pagar', hint: 'Pago manual desde la pasarela de pago de <a href="https://x.jim88.de/pay">PayPal</a> introduce el importe manualmente y tu email.' },
+  demo: { label: 'Pagar', hint: 'Pago manual desde PayPal pay.jim88.de - introduce el importe manualmente y tu email.' },
 };
 ---
 
@@ -188,7 +188,7 @@ const METHOD: Record<string, { label: string; hint: string }> = {
                 zone — possibly the very country the Stripe filter removed. */}
             {m === 'stripe' && destination.showSelect && (
               <label class="mb-2 flex items-center justify-between gap-2 text-xs uppercase tracking-widest text-muted">
-                Ship to
+                Enviar a 
                 <select
                   name="country"
                   class="rounded-md border border-line px-2 py-1.5 text-sm normal-case tracking-normal text-ink"
@@ -231,7 +231,7 @@ const METHOD: Record<string, { label: string; hint: string }> = {
       href={backHref}
       class="mt-6 inline-block text-xs uppercase tracking-widest text-faint hover:text-brand"
     >
-      &larr; Back
+      &larr; Atrás
     </a>
   </div>
 </Layout>
