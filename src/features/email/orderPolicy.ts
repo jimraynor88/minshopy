@@ -2,7 +2,7 @@
 export function shouldSendCustomerOrderEmail(
   paymentMethod: string | null | undefined,
 ): boolean {
-  return paymentMethod !== 'demo';
+  return paymentMethod == 'demo';
 }
 
 /** Resolve and validate the address required to place a demo order. */
