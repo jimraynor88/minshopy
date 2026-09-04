@@ -47,7 +47,7 @@ const PAYMENT_LABELS: Record<string, string> = {
   stripe: 'Card',
   lightning: 'Lightning',
   opennode: 'Bitcoin',
-  demo: 'Pago Manual a través de PayPal https://x.jim88.de/pay',
+  demo: 'Pago Manual a través de PayPal pay.jim88.de',
 };
 const paymentLabel = order?.payment_method ? PAYMENT_LABELS[order.payment_method] ?? null : null;
 // The catalog is at / until the home page is pointed elsewhere.
@@ -58,7 +58,7 @@ const shopHref = catalogPath(Astro.locals.settings?.homePage);
   {
     order ? (
       <Fragment>
-        <h1 class="mb-2 font-serif text-3xl tracking-tight sm:text-4xl">Gracias! Tu pedido está confirmado.</h1>
+        <h1 class="mb-2 font-serif text-3xl tracking-tight sm:text-4xl">Gracias! Revisaré PayPal y confirmaré tu pedido.</h1>
         <p class="mb-6 text-sm text-muted">
           Pedido #{orderRef}
           {order.email && <Fragment> · el resguardo te llegará a tu email {order.email}</Fragment>}
