@@ -147,7 +147,6 @@ const labelInternational =
 // provider key). The UI must not promise a send that would be skipped.
 const willEmailCustomer =
   !!order.email &&
-  order.payment_method !== 'demo' &&
   !!(await getEmailProvider(Astro.locals.settings ?? (await getStoreSettings(env.DB))));
 ---
 
@@ -461,7 +460,7 @@ const willEmailCustomer =
                     order fulfilled.{' '}
                     {willEmailCustomer
                       ? 'The customer is emailed the tracking details.'
-                      : 'No customer email will be sent (demo order or no email on file).'}
+                      : 'No customer email will be sent (no email on file or email not configured).'}
                   </p>
                 </form>
                 <form method="POST" action={`/api/admin/orders/${order.public_id}`} id="label-discard">
