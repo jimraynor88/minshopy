@@ -10,16 +10,16 @@ import { countUnresolvedInventoryExceptions } from '../features/orders/db';
 import '../styles/admin.css';
 
 type Section =
-  | 'dashboard'
-  | 'products'
-  | 'orders'
-  | 'customers'
-  | 'categories'
-  | 'media'
-  | 'pages'
-  | 'navigation'
-  | 'shipping'
-  | 'settings';
+  | 'Escritorio'
+  | 'Productos'
+  | 'Pedidos'
+  | 'Clientes'
+  | 'Categorias'
+  | 'Media'
+  | 'Páginas'
+  | 'Navegación'
+  | 'Envíos'
+  | 'Configuración';
 
 interface Props {
   title?: string;
@@ -135,8 +135,8 @@ const currentLabel = nav.find((n) => n.key === active)?.label ?? 'Menu';
         </nav>
 
         <div class="mt-4 flex gap-4 text-xs uppercase tracking-widest text-gray-400 sm:mt-8 sm:flex-col sm:gap-2">
-          <a href="/" class="hover:text-brand">&larr; View store</a>
-          {showLogout && <a href="/admin/logout" class="hover:text-brand">Log out</a>}
+          <a href="/" class="hover:text-brand">&larr; Ver Tienda</a>
+          {showLogout && <a href="/admin/logout" class="hover:text-brand">Desconectar</a>}
         </div>
       </aside>
 
@@ -148,8 +148,8 @@ const currentLabel = nav.find((n) => n.key === active)?.label ?? 'Menu';
               class="mb-6 flex items-center justify-between gap-3 rounded-md border border-brand/30 bg-brand/5 px-4 py-3 text-sm text-gray-700 transition hover:border-brand"
             >
               <span>
-                <strong class="font-semibold">Finish setting up your store</strong> — store name,
-                payment status, and more.
+                <strong class="font-semibold">Terminar la configuración de tu tienda</strong> — nombre,
+                estado de pagos, y más.
               </span>
               <span aria-hidden="true" class="text-brand">&rarr;</span>
             </a>
@@ -172,7 +172,7 @@ const currentLabel = nav.find((n) => n.key === active)?.label ?? 'Menu';
               class="mb-6 flex items-center justify-between gap-3 rounded-md border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800 transition hover:border-red-500"
             >
               <span>
-                <strong class="font-semibold">Shipping checkout is blocked by invalid configuration:</strong>{' '}
+                <strong class="font-semibold">El envío a domicilio está desactivado por falta de configuración:</strong>{' '}
                 {shippingIssue.reason}
               </span>
               <span aria-hidden="true">&rarr;</span>
@@ -186,7 +186,7 @@ const currentLabel = nav.find((n) => n.key === active)?.label ?? 'Menu';
               class="mb-6 flex items-center justify-between gap-3 rounded-md border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800 transition hover:border-red-500"
             >
               <span>
-                <strong class="font-semibold">Inventory needs attention.</strong>{' '}
+                <strong class="font-semibold">Échale un vistazo al inventario.</strong>{' '}
                 {inventoryExceptionCount} paid order line{inventoryExceptionCount === 1 ? '' : 's'} arrived after its stock hold ended and could not be fully deducted. Open the affected orders and reconcile stock.
               </span>
               <span aria-hidden="true">&rarr;</span>
