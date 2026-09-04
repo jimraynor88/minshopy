@@ -22,10 +22,10 @@ const md = (day: string) => day.slice(5); // MM-DD
 <div>
   <div class="mb-3 flex items-baseline justify-between">
     <h2 class="text-xs uppercase tracking-widest text-faint">
-      Revenue &middot; last {data.length} days
+      Ingresos &middot; desde {data.length} dias
     </h2>
     <span class="text-xs text-faint">
-      {formatPrice(total)} &middot; {orders} {orders === 1 ? 'order' : 'orders'}
+      {formatPrice(total)} &middot; {orders} {orders === 1 ? 'pedido' : 'pedidos'}
     </span>
   </div>
 
@@ -34,14 +34,14 @@ const md = (day: string) => day.slice(5); // MM-DD
     preserveAspectRatio="none"
     class="h-40 w-full"
     role="img"
-    aria-label={`Daily revenue for the last ${data.length} days`}
+    aria-label={`Ingresos diarios de los últimos ${data.length} días`}
   >
     {
       data.map((d, i) => {
         const h = (d.total_cents / max) * H;
         return (
           <rect x={i + 0.12} y={H - h} width={0.76} height={h} class="fill-brand">
-            <title>{`${d.day}: ${formatPrice(d.total_cents)} · ${d.orders} ${d.orders === 1 ? 'order' : 'orders'}`}</title>
+            <title>{`${d.day}: ${formatPrice(d.total_cents)} · ${d.orders} ${d.orders === 1 ? 'pedido' : 'pedidos'}`}</title>
           </rect>
         );
       })
