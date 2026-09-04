@@ -76,8 +76,8 @@ const fillerCards = fillers.map((product) => buildProductCard(product, cardOptio
       type="search"
       name="q"
       value={q}
-      placeholder="Search products…"
-      aria-label="Search products"
+      placeholder="Buscar Artículos…"
+      aria-label="Buscar Artículos"
       autofocus={!q}
       class="w-full border-0 border-b border-line bg-transparent px-1 py-2 text-base transition-colors focus:border-brand focus:outline-none"
     />
@@ -124,7 +124,7 @@ const fillerCards = fillers.map((product) => buildProductCard(product, cardOptio
 
   {
     q && products.length === 0 && (
-      <p class="text-muted">No hay nada así “{q}”. Prueba buscando otra cosa.</p>
+      <p class="text-muted">No hay “{q}”. Prueba buscando otra cosa.</p>
     )
   }
 
