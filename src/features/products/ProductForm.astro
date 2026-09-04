@@ -67,13 +67,13 @@ const inputClass =
   }
 
   <div>
-    <label class="block text-sm font-medium" for="name">Name</label>
+    <label class="block text-sm font-medium" for="name">Nombre</label>
     <input id="name" name="name" type="text" required value={product?.name ?? ''} class={inputClass} />
   </div>
 
   <div>
     <label class="block text-sm font-medium" for="slug">
-      Slug <span class="text-faint">(URL — blank to auto-generate from name)</span>
+      Slug <span class="text-faint">(URL — vacia para autogeneración)</span>
     </label>
     <input
       id="slug"
@@ -86,25 +86,25 @@ const inputClass =
   </div>
 
   <div>
-    <label class="block text-sm font-medium" for="description">Description</label>
+    <label class="block text-sm font-medium" for="description">Descripción</label>
     <textarea id="description" name="description" rows="3" class={inputClass}
       >{product?.description ?? ''}</textarea>
-      <p class="mt-1 text-xs text-gray-500">Plain text or Markdown — paragraphs, lists, links, and <code>/images/…</code> media render on the product page.</p>
+      <p class="mt-1 text-xs text-gray-500">Texto plano o Markdown — párrafos, listas, enlaces, e <code>/images/…</code> imágenes en la pagina del artículo.</p>
   </div>
 
   <div class="grid grid-cols-2 gap-4">
     <div>
-      <label class="block text-sm font-medium" for="price">Price (USD)</label>
+      <label class="block text-sm font-medium" for="price">Precio (EUR)</label>
       <input id="price" name="price" type="number" step={priceStep} min="0" required value={price} class={inputClass} />
     </div>
     <div>
-      <label class="block text-sm font-medium" for="stock">Stock</label>
+      <label class="block text-sm font-medium" for="stock">Inventario</label>
       <input id="stock" name="stock" type="number" step="1" min="0" value={product?.stock ?? 0} class={inputClass} />
     </div>
   </div>
 
   {attachmentActive() && <fieldset class="rounded-md border border-line p-4">
-    <legend class="px-1 text-sm font-medium">Shipping</legend>
+    <legend class="px-1 text-sm font-medium">Enviado</legend>
     <label class="flex items-center gap-2 text-sm">
       <input
         name="requires_shipping"
@@ -112,14 +112,14 @@ const inputClass =
         checked={product ? product.requires_shipping === 1 : true}
         class="h-4 w-4"
       />
-      Requires shipping
+      Requiere envío
     </label>
     <p class="mt-1 text-xs text-muted">
       Uncheck for digital goods (ebooks, gift cards). They are excluded from shipment weight
       and never block checkout for a missing weight.
     </p>
     <div class="mt-3">
-      <label class="block text-sm font-medium" for="weight">Weight ({weightUnit})</label>
+      <label class="block text-sm font-medium" for="weight">Peso ({weightUnit})</label>
       <input
         id="weight"
         name="weight"
@@ -138,7 +138,7 @@ const inputClass =
   </fieldset>}
 
   <fieldset class="rounded-md border border-line p-4">
-    <legend class="px-1 text-sm font-medium">Digital delivery</legend>
+    <legend class="px-1 text-sm font-medium">Descarga Digital</legend>
     {product?.file_key && (
       <p class="mb-3 text-sm text-muted">
         Attached: <strong>{product.file_name ?? 'download'}</strong>
@@ -153,11 +153,11 @@ const inputClass =
       accept=".pdf,.zip,.epub,.mp3,.m4a,.txt"
       class="mt-1 block w-full text-sm text-muted"
     />
-    <p class="mt-1 text-xs text-muted">Private download after payment. PDF, ZIP, EPUB, MP3, M4A, or TXT; 25 MB maximum. For a download-only product, uncheck <strong>Requires shipping</strong> above.</p>
+    <p class="mt-1 text-xs text-muted">Descarga privada después del pago. Solo PDF, ZIP, EPUB, MP3, M4A, or TXT; y 25 MB max. por descarga única por artículo, desactivar <strong>Requiere envío</strong> abajo.</p>
     {product?.file_key && (
       <label class="mt-3 flex items-center gap-2 text-sm">
         <input type="checkbox" name="remove_deliverable" class="h-4 w-4" />
-        Remove attachment from future purchases
+        Eliminar archivo para futuras compras
       </label>
     )}
   </fieldset>
@@ -166,7 +166,7 @@ const inputClass =
     showImage && (
       <div>
         <label class="block text-sm font-medium" for="image">
-          Image
+          Imágen
         </label>
         <input id="image" name="image" type="file" accept="image/*" class="mt-1 block w-full text-sm text-muted file:mr-3 file:cursor-pointer file:rounded-md file:border-0 file:bg-brand file:px-4 file:py-2 file:text-xs file:font-medium file:uppercase file:tracking-wider file:text-on-brand hover:file:bg-brand-hover" />
       </div>
@@ -201,7 +201,7 @@ const inputClass =
 
   <label class="flex items-center gap-2 text-sm">
     <input name="active" type="checkbox" checked={product ? product.active === 1 : true} class="h-4 w-4" />
-    Active (visible in storefront)
+    Activo (visible en el inicio)
   </label>
 
   <input type="hidden" name="currency" value={defaultCurrency} />
@@ -210,6 +210,6 @@ const inputClass =
     <button type="submit" class="rounded-md bg-brand px-5 py-2 font-medium text-on-brand hover:bg-brand-hover">
       {submitLabel}
     </button>
-    <a href="/admin/products" class="rounded-md border border-line px-5 py-2 hover:bg-surface">Cancel</a>
+    <a href="/admin/products" class="rounded-md border border-line px-5 py-2 hover:bg-surface">Cancelar</a>
   </div>
 </form>
