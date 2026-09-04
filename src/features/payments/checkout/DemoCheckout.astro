@@ -57,7 +57,8 @@ try {
     </p>
   )}
 
-  <form method="POST" class="space-y-4">
+  <form id="checkout-form" method="POST" class="space-y-4">
+    <!-- Email -->
     <div>
       <label class="mb-1 block text-xs font-medium text-muted" for="email">
         Correo para la confirmación del pedido
@@ -73,188 +74,110 @@ try {
       />
     </div>
 
-    <!-- Botón que redirige a PayPal -->
-    <a
-      href="https://pay.jim88.de"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="block w-full rounded-md bg-brand px-5 py-3 text-center text-sm font-medium uppercase tracking-wider text-on-brand hover:bg-brand-hover"
-    >
-      Pagar desde PayPal
-    </a>
-
-    <a href="/cart" class="block text-center text-xs uppercase tracking-widest text-faint hover:text-brand">
-      Cancelar
-    </a>
-  </form>
-</div>      </div>
-    )}
-    <div class="mt-2 flex items-center justify-between border-t border-line pt-2 text-base font-medium">
-      <span>Total</span>
-      <span class="tabular-nums">{total}</span>
-    </div>
-  </div>
-
-  {declined && (
-    <p class="mb-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
-      {declined}
-    </p>
-  )}
-
-  <form method="POST" class="space-y-4">
-    {/* Demo skips the address step (checkout.astro auto-submits a sample
-        address), so this is the shopper's only chance to set an email —
-        prefilled with the sample, editable for anyone who wants the receipt
-        for real. Settlement prefers the submitted value
-        (resolveRequiredOrderEmail). */}
-    <div>
-      <label class="mb-1 block text-xs font-medium text-muted" for="email">
-        Email para la confirmación
-      </label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        value={pending.email ?? ''}
-        autocomplete="email"
-        required
-        class="w-full rounded-md border border-line px-3 py-2 text-sm focus:border-brand focus:outline-none"
-      />
-    </div>
-
-    {/* Decorative test-card fields — prefilled and ignored; they exist so the
-        flow looks like a real card form. */}
-    <fieldset class="rounded-lg border border-line p-3">
-      <legend class="px-1 text-xs font-medium text-muted">Card (test — input ignored)</legend>
-      <input
-        type="text"
-        value="4242 4242 4242 4242"
-        inputmode="numeric"
-        aria-label="Card number"
-        class="mb-2 w-full rounded-md border border-line px-3 py-2 font-mono text-sm text-muted"
-      />
-      <div class="flex gap-2">
+    <!-- Datos de envío -->
+    <fieldset class="rounded-lg border border-line p-3 space-y-3">
+      <legend class="px-1 text-xs font-medium text-muted">Datos de envío</legend>
+      
+      <div>
+        <label class="mb-1 block text-xs font-medium text-muted" for="fullName">Nombre completo</label>
         <input
+          id="fullName"
+          name="fullName"
           type="text"
-          value="12 / 34"
-          aria-label="Expiry"
-          class="w-1/2 rounded-md border border-line px-3 py-2 font-mono text-sm text-muted"
+          required
+          class="w-full rounded-md border border-line px-3 py-2 text-sm focus:border-brand focus:outline-none"
         />
+      </div>
+
+      <div>
+        <label class="mb-1 block text-xs font-medium text-muted" for="address">Dirección</label>
         <input
+          id="address"
+          name="address"
           type="text"
-          value="123"
-          aria-label="CVC"
-          class="w-1/2 rounded-md border border-line px-3 py-2 font-mono text-sm text-muted"
+          required
+          class="w-full rounded-md border border-line px-3 py-2 text-sm focus:border-brand focus:outline-none"
+        />
+      </div>
+
+      <div class="flex gap-2">
+        <div class="w-1/2">
+          <label class="mb-1 block text-xs font-medium text-muted" for="city">Ciudad</label>
+          <input
+            id="city"
+            name="city"
+            type="text"
+            required
+            class="w-full rounded-md border border-line px-3 py-2 text-sm focus:border-brand focus:outline-none"
+          />
+        </div>
+        <div class="w-1/2">
+          <label class="mb-1 block text-xs font-medium text-muted" for="postalCode">Código postal</label>
+          <input
+            id="postalCode"
+            name="postalCode"
+            type="text"
+            required
+            class="w-full rounded-md border border-line px-3 py-2 text-sm focus:border-brand focus:outline-none"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label class="mb-1 block text-xs font-medium text-muted" for="country">País</label>
+        <input
+          id="country"
+          name="country"
+          type="text"
+          required
+          value="España"
+          class="w-full rounded-md border border-line px-3 py-2 text-sm focus:border-brand focus:outline-none"
         />
       </div>
     </fieldset>
 
-    <div>
-      <label class="mb-1 block text-xs font-medium text-muted" for="outcome">
-        Simulate outcome
-      </label>
-      <select
-        id="outcome"
-        name="outcome"
-        class="w-full rounded-md border border-line px-3 py-2 text-sm focus:border-brand focus:outline-none"
-      >
-        {Object.entries(OUTCOMES).map(([value, label]) => (
-          <option value={value}>{label}</option>
-        ))}
-      </select>
-    </div>
-
+    <!-- Botón de pago -->
     <button
       type="submit"
       class="w-full rounded-md bg-brand px-5 py-3 text-sm font-medium uppercase tracking-wider text-on-brand hover:bg-brand-hover"
     >
-      Pagar {total}
-    </button>
-    <a href="/cart" class="block text-center text-xs uppercase tracking-widest text-faint hover:text-brand">
-      Cancelar
-    </a>
-  </form>
-</div>    </div>
-  </div>
-
-  {declined && (
-    <p class="mb-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
-      {declined}
-    </p>
-  )}
-
-  <form method="POST" class="space-y-4">
-    {/* Demo skips the address step (checkout.astro auto-submits a sample
-        address), so this is the shopper's only chance to set an email —
-        prefilled with the sample, editable for anyone who wants the receipt
-        for real. Settlement prefers the submitted value
-        (resolveRequiredOrderEmail). */}
-    <div>
-      <label class="mb-1 block text-xs font-medium text-muted" for="email">
-        Email para confirmar el pago.
-      </label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        value={pending.email ?? ''}
-        autocomplete="email"
-        required
-        class="w-full rounded-md border border-line px-3 py-2 text-sm focus:border-brand focus:outline-none"
-      />
-    </div>
-
-    (/* Decorative test-card fields — prefilled and ignored; they exist so the
-        flow looks like a real card form. */}
-   (/*  <fieldset class="rounded-lg border border-line p-3">
-      <legend class="px-1 text-xs font-medium text-muted">Card (test — input ignored)</legend>
-      <input
-        type="text"
-        value="4242 4242 4242 4242"
-        inputmode="numeric"
-        aria-label="Card number"
-        class="mb-2 w-full rounded-md border border-line px-3 py-2 font-mono text-sm text-muted"
-      />
-      <div class="flex gap-2">
-        <input
-          type="text"
-          value="12 / 34"
-          aria-label="Expiry"
-          class="w-1/2 rounded-md border border-line px-3 py-2 font-mono text-sm text-muted"
-        />
-        <input
-          type="text"
-          value="123"
-          aria-label="CVC"
-          class="w-1/2 rounded-md border border-line px-3 py-2 font-mono text-sm text-muted"
-        />
-      </div>
-    </fieldset>
-
-    <div>
-      <label class="mb-1 block text-xs font-medium text-muted" for="outcome">
-        Simulate outcome
-      </label>
-
-*/}
-      <select
-        id="outcome"
-        name="outcome"
-        class="w-full rounded-md border border-line px-3 py-2 text-sm focus:border-brand focus:outline-none"
-      >
-        {Object.entries(OUTCOMES).map(([value, label]) => (
-          <option value={value}>{label}</option>
-        ))}
-      </select>
-    </div>
-
-    <button
-      type="submit" a href="https://pay.jim88.de" class="w-full rounded-md bg-brand px-5 py-3 text-sm font-medium uppercase tracking-wider text-on-brand hover:bg-brand-hover"
-    >
-      Pagar desde PayPal{total}
+      Pagar desde PayPal
     </button>
     <a href="/cart" class="block text-center text-xs uppercase tracking-widest text-faint hover:text-brand">
       Cancelar
     </a>
   </form>
 </div>
+
+<script>
+  // Envío asíncrono para guardar datos y luego redirigir a PayPal
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('checkout-form');
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch(window.location.href, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          // Redirigir a PayPal después de guardar los datos
+          window.location.href = 'https://pay.jim88.de';
+        } else {
+          alert('Hubo un problema al guardar los datos. Por favor, inténtalo de nuevo.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error de conexión. Inténtalo de nuevo.');
+      }
+    });
+  });
+</script>
