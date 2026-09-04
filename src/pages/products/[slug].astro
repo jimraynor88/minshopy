@@ -104,7 +104,7 @@ if (loaded.backfillRelated) {
           await navigator.clipboard.writeText(url);
           if (label) {
             const prev = label.textContent;
-            label.textContent = 'Link copied';
+            label.textContent = 'Link copiado al portapapeles';
             setTimeout(() => {
               label.textContent = prev;
             }, 1500);
