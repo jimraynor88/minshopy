@@ -8,18 +8,19 @@ import { countUnresolvedInventoryExceptions } from '../features/orders/db';
 // storefront set's tokens and base-layer rules. A dark set would otherwise
 // restyle every authenticated Admin page (see src/styles/admin.css).
 import '../styles/admin.css';
+import { t } from '../../i18n';
 
 type Section =
-  | 'Escritorio'
-  | 'Productos'
-  | 'Pedidos'
-  | 'Clientes'
-  | 'Categorias'
-  | 'Media'
-  | 'Páginas'
-  | 'Navegación'
-  | 'Envíos'
-  | 'Configuración';
+  | 'dashboard'
+  | 'products'
+  | 'orders'
+  | 'customers'
+  | 'categories'
+  | 'media'
+  | 'pages'
+  | 'navigation'
+  | 'shipping'
+  | 'settings';
 
 interface Props {
   title?: string;
