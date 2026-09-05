@@ -41,6 +41,7 @@ import { purgeStockProductCache } from '../../features/cache/purge';
 import { lifecycleActive } from '../../features/digitalDelivery/rollout.ts';
 import { mintLightningOrder } from '../../features/payments/lightning-provider';
 import { getLightningBackend } from '../../features/payments/lightning';
+import { t } from '../../i18n';
 
 export const prerender = false;
 
@@ -131,12 +132,12 @@ export const POST: APIRoute = async ({ request, cookies, url, redirect }) => {
   const productIdRaw = form.get('product_id');
   const productPublicId = parsePublicId(productIdRaw, 'product');
   if (productIdRaw != null && String(productIdRaw).trim() !== '' && !productPublicId) {
-    return new Response('Invalid product id (expected a prod_… public ID).', { status: 400 });
+    return new Response(t('api.checkout.invalid_product_id'), { status: 400 });
   }
   if (productPublicId) {
     const product = await getProductByPublicId(env.DB, productPublicId);
     if (!product || !product.active) {
-      return new Response('Product unavailable', { status: 404 });
+      return new Response(t('api.checkout.product_unavailable'), { status: 404 });
     }
     // Express "Buy now" — resolve variant + extras right here so it checks out
     // WITHOUT the cart (works even when the cart is switched off).
